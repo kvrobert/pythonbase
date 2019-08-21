@@ -18,7 +18,7 @@ with open('test.txt', 'r') as f:
 #   f_content = f.read(SIZE_TO_READ)
 
 payload = {'param1': 10, 'param2': "this is the second param"}
-payload_post = {'lang': 'hun', 'content': "Some of text to use REX to extract entities"}
+payload_post = {'language': 'hun', 'content': "Valami szöveg Róberttel. Budapest csodállatos város"}
 
 r = requests.get('http://httpbin.org/get?age=10&seconds=hello')
 r2 = requests.get('http://httpbin.org/get', params=payload)
@@ -33,3 +33,14 @@ print(r_dict["form"])
 
 #print(r.url)
 #print(r2.url)
+
+# Auth test
+
+data_auth = {"user": "robes", "passwd": "robeszpass",}
+r_auth = requests.get("http://httpbin.org/basic-auth/robesz/robeszpass", auth=('robesz', 'robeszpass' ))
+
+print(r_auth.text)
+
+r_rex = requests.post('http://192.168.1.241:14582/rest/v1/entities', json=payload_post)
+
+print(r_rex.json())
